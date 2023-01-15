@@ -15,18 +15,20 @@
 #include <sys/file.h>
 
 #define BUFFER_SIZE 128
+#define BUFF_S 256
+#define NAME_SIZE 32
 
 char *pipe_name;
 
 struct Subscriber_pipe{
-    char subscriber_pipe[256];
+    char subscriber_pipe[BUFF_S];
     struct Subscriber_pipe* next;
 }sub_t;
 
 struct Box{
-    char name[32];
+    char name[NAME_SIZE];
     int box_file;
-    char publisher_pipe[256];
+    char publisher_pipe[BUFF_S];
     struct Subscriber_pipe *subscriber_pipe;
     struct Box *next;
 }box_t;

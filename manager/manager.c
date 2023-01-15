@@ -14,6 +14,7 @@
 #include <sys/file.h>
 
 #define BUFFER_SIZE 128
+#define BUFF_S 296
 int register_pipe;
 char *pipe_name;
 
@@ -87,7 +88,7 @@ int main(int argc, char **argv) {
     if(register_pipe == -1){
         sig_handler(-1);
     }
-    char buffer[296];
+    char buffer[BUFF_S];
     flock(register_pipe, LOCK_EX);
     if(strcmp(func, "create") == 0){
         strcat(buffer, "3|");

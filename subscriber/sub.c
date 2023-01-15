@@ -16,8 +16,13 @@
 
 #define PIPE_SIZE 256
 #define BOX_SIZE 32
+#define BUFF_S 296
+#define ARGS_NUM 4
+#define PIPE_NAME 2
+#define MSG_BOX 3
+
 int register_pipe;
-char pipe_name[256];
+char pipe_name[PIPE_SIZE];
 
 void send_msg(int tx, char const *str) {
     size_t len = strlen(str);
@@ -47,20 +52,20 @@ void sig_handler(int sig){
 
 void transform_name_pipe(){
     size_t j = strlen(pipe_name);
-    for(;j < 256; j++){
+    for(;j < PIPE_SIZE; j++){
         pipe_name[j] = '\0';
     } 
 }
 
 int main(int argc, char **argv) {
     signal(SIGINT, sig_handler);
-    if(argc != 4){
+    if(argc != ARGS_NUM){
         printf("Numero de argumento nao esta correto.\n");
         return -1;
     }
     char *register_pipe_name = argv[1];
-    strcpy(pipe_name,argv[2]);
-    char *message_box = argv[3];
+    strcpy(pipe_name,argv[PIPE_NAME]);
+    char *message_box = argv[MSG_BOX];
     
 
     register_pipe = open(register_pipe_name, O_WRONLY);

@@ -15,6 +15,8 @@
 #include <sys/file.h>
 
 #define BUFFER_SIZE 128
+#define BUFF_S 296
+#define ARGS_NUM 4
 int register_pipe;
 char *pipe_name;
 char *message_box;
@@ -47,7 +49,7 @@ void sig_handler(int sig){
 
 int main(int argc, char **argv) {
     signal(SIGINT, sig_handler);
-    if(argc != 4){
+    if(argc != ARGS_NUM){
         printf("Numero de argumento nao esta correto.\n");
         return -1;
     }
@@ -64,7 +66,7 @@ int main(int argc, char **argv) {
     if(register_pipe == -1){
         sig_handler(-1);
     }
-    char buffer[296];
+    char buffer[BUFF_S];
     flock(register_pipe, LOCK_EX);
     strcat(buffer, "2|");
     strcat(buffer, pipe_name);
